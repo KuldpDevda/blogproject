@@ -1,0 +1,20 @@
+local_settings.py
+local.py
+*/media/
+**/migrations/
+*/staticfiles/
+**/images/
+*.pyc
+settings.ini
+postgresql
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+.idea/
+.dockerignore
+.docker-compose.yml
+.Dockerfile
