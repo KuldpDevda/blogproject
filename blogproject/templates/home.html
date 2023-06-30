@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% load static %}
+{% block content %}
+<html>
+<hr style="height:6px; width:100%; border-width:2;background-color:white" >
+<body>
+    {% if user.is_authenticated %}
+        {% for post in object_list %}
+
+            <div class='post-entry'>
+                <h4>{{ post.author }}</h4>
+                <h2><a href="{% url 'blog:post_detail' post.pk %}" style="color:black;">{{ post.title }}</a></h2>            
+                <p>{{ post.body }}</p>
+                {% if post.header_image %}
+                  <h2><a href="{% url 'blog:post_detail' post.pk %}"><img src="{{ post.header_image.url }}" alt="" width="400" height="350">{{ form.media }}</img></a></h2>
+                {% endif %} 
+                <h6>{{ post.date }}</h6>
+            </div>
+            
+              <form method="POST">
+               {% csrf_token %}
+                    <p id="total_likes-{{ post.pk }}">{{ post.total_likes }}</p>
+                    {% if request.user in post.likes.all %}
+                        <button type="button" id="dislike-{{ post.pk }}" name="post_id" value="{{ post.pk }}" class="like-dislike btn btn-danger">Unlike</button>
+                    {% else %}
+                        <button type="button" id="like-{{ post.pk }}" name="post_id" value="{{ post.pk }}" class="like-dislike btn btn-primary">Like</button>
+                    {% endif %}
+              </form>
+        <hr style="height:3px; width:100%; border-width:2;background-color:pink" >
+        {% endfor %}
+    {% endif %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ 
+<script src="{% static 'js/ajax.js' %}"></script>
+</body>
+</html>
+{% endblock content %}

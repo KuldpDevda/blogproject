@@ -1,0 +1,30 @@
+<center>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <h1><a style="color:pink">Instagram</a></h1>
+     <a href="{% url 'blog:home' %}">Back To Home</a><br>
+    <a  href="{% url 'logout' %}">Logout</a>
+{% block title %}{{ post.title_tag }}{% endblock %}
+
+{% block content %}
+ <div class="content-section">
+          <h2>Profile Detail</h2>
+          <h4 class="account-heading">{{ user.username }}</h4>
+          <h5 class='text-secondary'>{{user.first_name}} <br>{{user.last_name}}</h5>
+          <p class="text-secondary">{{ user.email }}</p>
+          <a href="{% url 'blog:profile_edit' user.pk %}"><button class="btn btn-outline-info" style="background-color:orange; border-color:black; color:white"> Edit Profile</button></a>
+ </div>
+
+  <form method="POST" >
+    {% for post in object_list %}
+         <div class='post-entry'>
+            <h4>{{ post.author }}</h4>
+            <h4><a href="{% url 'blog:post_detail' post.pk %}" style="color:lightgreen;">{{ post.title }}</a></h4>
+            <h5>{{ post.body }}</h5>
+            {% if post.header_image %}
+              <h2><a href="{% url 'blog:post_detail' post.pk %}"><img src="{{ post.header_image.url }}" alt="" width="400" height="350">{{ form.media }}</img></a></h2>
+            {% endif %} 
+    {% endfor %}
+
+  </form>
+
+{% endblock content %}

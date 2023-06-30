@@ -1,0 +1,18 @@
+<center>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+  <h1><a style="color:pink">Instagram</a></h1>
+{% if user.is_authenticated %}
+  <a href="{% url 'home' %}"></a>
+{% else %}
+    {% block content %}
+      <h2><a style='color:darkblue'> User Registration Page </a></h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-outline-info" type="submit" style=" background-color: gray;">Sign Up</button>
+        <br><a href="{% url 'blog:home' %}">Back To Home</a><br>
+      </form>
+   {% endblock %}
+{% endif %}
+
