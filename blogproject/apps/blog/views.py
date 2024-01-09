@@ -9,12 +9,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import PasswordChangeView
-from .forms import CommentForm,UserRegisterForm, ProfileUpdateForm
+from .forms import CommentForm,UserRegisterForm, ProfileUpdateForm,EmailForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from rest_framework import generics
 from django.core.mail import send_mail
-from .forms import EmailForm
 # from rest_framework.authtoken.views import ObtainAuthToken
 
 
