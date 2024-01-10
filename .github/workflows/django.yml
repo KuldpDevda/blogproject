@@ -49,5 +49,4 @@ jobs:
       env:
         DJANGO_SETTINGS_MODULE: blogproject.settings
       run: |
-        cd blogproject
         pytest
