@@ -41,7 +41,8 @@ jobs:
         pip install Django
         pip install pytest
     - name: Wait for PostgreSQL to be ready
-      run: sleep 10s
+      run: |
+        until nc -zv localhost 5432; do echo "Waiting for PostgreSQL to be ready..."; sleep 1; done
     - name: Run Migrations
       run: python manage.py migrate
     - name: Run Tests

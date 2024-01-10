@@ -1,6 +1,16 @@
 from django.test import Client
 import pytest
 from django.test import TestCase
+import sys
+import os
+
+sys.path.append(os.path.abspath('/home/dell/Project/blogproject'))
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'blogproject.settings.dev'
+
+import django
+django.setup()
+
 
 
 @pytest.mark.django_db
