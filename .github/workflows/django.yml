@@ -15,16 +15,37 @@ jobs:
       matrix:
         python-version: [3.8]
 
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: blogproject
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: psql
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
+        retries: 3
+        delay: 10
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install Django
+        pip install pytest
+    - name: Wait for PostgreSQL to be ready
+      run: sleep 10s
+    - name: Run Migrations
+      run: python manage.py migrate
     - name: Run Tests
+      env:
+        DJANGO_SETTINGS_MODULE: blogproject.settings
       run: |
-        python manage.py test
+        pytest

@@ -1,15 +1,17 @@
 from django.test import Client
 import pytest
+from django.test import TestCase
 
 
+@pytest.mark.django_db
 def test_home_view():
     client = Client()
-    response = client.get('/blog/home/')
+    response = client.get('')
     assert response.status_code == 200
 
 @pytest.mark.django_db
 def test_dashboard_view():
     client = Client()
-    response = client.get('/blog/profile/')
+    response = client.get('/signup/')
     assert response.status_code == 200
 

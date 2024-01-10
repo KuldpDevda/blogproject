@@ -6,7 +6,7 @@ DATABASES = {
         'NAME': 'blogproject',
         'USER': 'postgres',
         'PASSWORD': 'psql',
-        'HOST': 'db',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
