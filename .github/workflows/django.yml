@@ -48,7 +48,7 @@ jobs:
       run: sleep 10s
 
     - name: Apply Migrations
-      run: python blogproject/manage.py migrate
+      run: python manage.py migrate
 
     - name: Run Tests
       env:
