@@ -6,8 +6,12 @@ ROOT_URLCONF = 'blogproject.urls'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / "db.sqlite3",
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'blogproject_test',
+        'USER': 'postgres',
+        'PASSWORD': 'psql',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 

@@ -2,6 +2,8 @@ from django.test import Client
 import pytest
 from django.test import TestCase
 
+import django
+django.setup()
 
 @pytest.mark.django_db
 def test_home_view():
