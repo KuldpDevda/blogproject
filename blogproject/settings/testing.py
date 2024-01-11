@@ -1,7 +1,9 @@
 from .base import *
 
+DEBUG = False
 
 ROOT_URLCONF = 'blogproject.urls'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
