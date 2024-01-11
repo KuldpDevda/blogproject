@@ -52,7 +52,7 @@ jobs:
 
     - name: Run Tests
       env:
-        DJANGO_SETTINGS_MODULE: blogproject.settings
+        DJANGO_SETTINGS_MODULE: blogproject.settings.testing
         PYTHONPATH: ${{ github.workspace }}
       run: |
         pytest
