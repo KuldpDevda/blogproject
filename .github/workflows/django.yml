@@ -27,28 +27,32 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
         retries: 3
         delay: 10
+
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install Django
         pip install pytest
+
     - name: Wait for PostgreSQL to be ready
-      run: |
-        until nc -zv localhost 5432; do echo "Waiting for PostgreSQL to be ready..."; sleep 1; done
-    - name: Run Migrations
-      run: python manage.py migrate
+      run: sleep 10s
+
+    - name: Apply Migrations
+      run: python blogproject/manage.py migrate
+
     - name: Run Tests
       env:
-        DJANGO_SETTINGS_MODULE: blogproject.settings
-        PYTHONPATH: ${{ github.workspace }}/blogproject
+        DJANGO_SETTINGS_MODULE: blogproject.settings.testing
+        PYTHONPATH: ${{ github.workspace }}
       run: |
-        cd blogproject
         pytest
